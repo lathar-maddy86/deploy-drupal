@@ -1,0 +1,10 @@
+---
+
+- name: Install mysql-server
+  apt: name=mysql-server state=latest
+
+- name: Install libapache2-mod-auth-mysql
+  apt: name=libapache2-mod-auth-mysql state=latest
+
+- name: Install php5-mysql module
+  apt: name=php5-mysql state=latest

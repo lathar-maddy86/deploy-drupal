@@ -1,0 +1,17 @@
+---
+
+- name: Install php-fpm
+  apt: name=php5-fpm state=latest
+
+- name: Install php gd library
+  apt: name=php5-gd state=latest
+
+- name: copy www.conf
+  copy: src=files/www.conf dest=/etc/php5/fpm/pool.d/www.conf
+  
+- name: Copy php.ini
+  copy: src=files/php.ini dest=/etc/php5/fpm/php.ini
+  notify:
+    Restart php5-fpm
+    
+

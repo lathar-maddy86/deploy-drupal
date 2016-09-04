@@ -1,0 +1,19 @@
+---
+
+- hosts: localhost
+
+  sudo: yes
+
+  vars:
+    - db_name: drupal
+    - db_user: drupal_user
+    - db_password: Passw0rd2016
+
+  roles:
+    - update
+    - git
+    - php-fpm
+    - nginx
+    - mysql
+    - drupal
+    - drush

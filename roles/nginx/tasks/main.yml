@@ -1,0 +1,16 @@
+---
+  
+- name: Install nginx
+  apt: name=nginx state=latest
+  
+- name: Copy nginx.conf
+  copy: src=files/default dest=/etc/nginx/sites-available/default
+  
+- name: Remove default symlink
+  command: rm /etc/nginx/sites-enabled/default
+  
+- name: Create symlink to enable default site created
+  command: ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+  notify:
+    Restart nginx
+  

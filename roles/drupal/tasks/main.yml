@@ -1,0 +1,31 @@
+---
+
+- name: Install git
+  apt: name=git state=latest
+
+- name: Clone drupal
+  command: wget http://ftp.drupal.org/files/projects/drupal-7.23.tar.gz
+
+- name: Extract drupal
+  command: tar xvf drupal-7.23.tar.gz
+  
+- name: Copy drupal to target directory
+  copy: src=/home/ubuntu/drupal-7.23/ dest=/var/www/html/drupal/
+
+- name: Create settings.php
+  command: cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
+
+- name: Create services.yml
+  command: cp /var/www/html/drupal/sites/default/default.services.yml /var/www/html/drupal/sites/default/services.yml
+
+- name: Set permissions on settings.php
+  file: path=/var/www/html/drupal/sites/default/settings.php mode=777
+
+- name: Set permissions on services.php
+  file: path=/var/www/html/drupal/sites/default/services.php mode=777
+
+- name: Create files directory and update permissions
+  file: >
+    path=/var/www/html/drupal/sites/default/files
+    mode=777
+    recurse=yes
